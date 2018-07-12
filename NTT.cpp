@@ -1,4 +1,4 @@
-long long int mod = (119ll << 23) + 1, c_root = 5;
+long long int mod = (119ll << 23) + 1, c_root = 3;
 
 namespace NTT {
 	typedef long long int ll;
