@@ -5,7 +5,7 @@ private:
 	vector<Info> tree;
 	
 	Info merge(Info &l, Info &r) {
-		return min(l, r);
+		
 	}
 	
 public:
@@ -40,15 +40,15 @@ public:
 	}
 	
 	Info get(int l, int r) {
-		Info ansl = 1e9, ansr = ansl;
+		Info ans = ; //colocar a base
 		for(l += n, r += n + 1; l < r; l >>= 1, r >>= 1) {
 			if (l & 1) {
-				ansl = merge(ansl, tree[l++]);
+				ans = merge(ans, tree[l++]);
 			}
 			if (r & 1) {
-				ansr = merge(ansr, tree[--r]);
+				ans = merge(ans, tree[--r]);
 			}
 		}
-		return merge(ansl, ansr);
+		return ans;
 	}
 };
