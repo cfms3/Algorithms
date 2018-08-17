@@ -15,27 +15,33 @@ private:
     vector<Edge> edges;
     vector<cost_t> dis;
     vector<int> prev, id_prev;
-
-    pair<flow_t, cost_t> dijkstra(int src, int sink) {
+	vector<int> q;
+	vector<bool> inq;
+    
+    pair<flow_t, cost_t> spfa(int src, int sink) {
         fill(dis.begin(), dis.end(), int(1e9)); //cost_t inf
         fill(prev.begin(), prev.end(), -1);
-        priority_queue<ii, vector<ii>, greater<ii>> pq;
-        pq.push(ii(0, src));
+        fill(inq.begin(), inq.end(), false);
+        q.clear();
+        q.push_back(src);
+        inq[src] = true;
         dis[src] = 0;
-        while(!pq.empty()) {
-            ii el_cur = pq.top();
-            pq.pop();
-            int cur = el_cur.second;
-            cost_t cur_d = el_cur.first;
-            if (dis[cur] < cur_d) continue;
-            for(auto id : adj[cur]) {
-                int to = edges[id].to;
-                if (edges[id].cap == 0 || dis[to] <= cur_d + edges[id].cost) continue;
-                prev[to] = cur;
-                id_prev[to] = id;
-                dis[to] = cur_d + edges[id].cost;
-                pq.push(ii(dis[to], to));
-            }
+        for(int on = 0; on < (int) q.size(); on++) {
+        	int cur = q[on];
+        	inq[cur] = false;
+        	for(auto id : adj[cur]) {
+        		if (edges[id].cap == 0) continue;
+        		int to = edges[id].to;
+        		if (dis[to] > dis[cur] + edges[id].cost) {
+        			prev[to] = cur;
+        			id_prev[to] = id;
+        			dis[to] = dis[cur] + edges[id].cost;
+        			if (!inq[to]) {
+        				q.push_back(to);
+        				inq[to] = true;	
+        			}
+        		}
+        	}
         }
         flow_t mn = flow_t(1e9);
         for(int cur = sink; prev[cur] != -1; cur = prev[cur]) {
@@ -60,6 +66,7 @@ public:
         dis.resize(n + 2);
         prev.resize(n + 2);
         id_prev.resize(n + 2);
+        inq.resize(n + 2);
     }
     void init(int a) {
         n = a;
@@ -68,6 +75,7 @@ public:
         dis.resize(n + 2);
         prev.resize(n + 2);
         id_prev.resize(n + 2);
+        inq.resize(n + 2);
     }
     void add(int from, int to, flow_t cap, cost_t cost) {
         adj[from].push_back(int(edges.size()));
@@ -77,7 +85,7 @@ public:
     }
     pair<flow_t, cost_t> maxflow(int src, int sink) {
         pair<flow_t, cost_t> ans(0, 0), got;
-        while((got = dijkstra(src, sink)).first > 0) {
+        while((got = spfa(src, sink)).first > 0) {
             ans.first += got.first;
             ans.second += got.second;
         }
