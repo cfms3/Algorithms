@@ -9,7 +9,7 @@ struct node {
         prior = rng();
         l = NULL;
         r = NULL;
-        size = 0;
+        size = 1;
     }
 };
 
