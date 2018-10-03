@@ -124,3 +124,70 @@ public:
 private:
     set<Line> hull;
 };
+
+
+///////////////////////////////////
+//Linear
+
+class HullDynamic {
+public:
+    const double_t inf = 1e18;
+
+    struct Line {
+        ll m, b;
+        double_t start;
+        bool is_query;
+        
+        Line() {}
+        
+        Line(ll _m, ll _b, double_t _start, bool _is_query) : m(_m), b(_b), start(_start), is_query(_is_query) {}
+        
+        ll eval(ll x) { 
+            return m * x + b; 
+        }
+
+        double_t intersect(const Line& l) const {
+            return (double_t) (l.b - b) / (m - l.m);
+        }
+
+        bool operator< (const Line& l) const {
+            if (is_query == 0) return m > l.m;
+            return (start < l.start);
+        }
+    };
+
+    typedef vector<Line>::iterator iterator_t;
+
+    void insert(ll m, ll b) {
+        Line f(m, b, -inf, 0);
+        while((int) hull.size() > 1 && f.intersect(hull[(int) hull.size() - 2]) <= hull.back().start) {
+            hull.pop_back();
+        }
+        double_t st = -inf;
+        if (!hull.empty()) {
+            st = f.intersect(hull.back());
+        }
+        f.start = st;
+        hull.push_back(f);
+        /*for (auto it : hull) {
+            cout << it.m << ' ' << it.b << ' ' << it.start << '\n';
+        }
+        cout << '\n';*/
+    }
+
+    ll get(ll x) {
+        pt = min(pt, (int) hull.size() - 1);
+        while(pt < (int) hull.size() - 1) {
+            if (hull[pt + 1].start <= x) {
+                pt++;
+            } else {
+                break;
+            }
+        }
+        //cout << hull[pt].m << ' ' << hull[pt].b << '\n';
+        return hull[pt].m * x + hull[pt].b;
+    }
+
+private:
+    vector<Line> hull;
+};
