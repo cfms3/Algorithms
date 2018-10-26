@@ -20,7 +20,7 @@ inline int mul(int a, int b) {
         "mull %%ebx;"
         "divl %3;"
         : "=d" (ans)
-        : "a" (a), "b" (b), "r" (mod)
+        : "a" (a), "b" (b), "c" (mod)
     );
     return ans;
 }
