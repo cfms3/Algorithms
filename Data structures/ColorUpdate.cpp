@@ -2,7 +2,7 @@ template<class Info>
 struct ColorUpdate {
 	struct Range {
 		int l, r;
-		Info value;
+	  Info value;
 		Range(int l = 0, int r = 0, Info value = 0) : l(l), r(r), value(value) {}
 		
 		bool operator < (const Range &r) const { return l < r.l; }
