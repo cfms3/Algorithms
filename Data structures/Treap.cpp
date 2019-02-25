@@ -274,11 +274,11 @@ public:
     merge(root, r, root);
   }
 
-  int get(int pos) {
+  Info_t get(int pos) {
     pnode_t l, mid, r;
     split(root, pos, 0, l, mid);
     split(mid, 1, 0, mid, r);
-    int ans = mid->value;
+    Info_t ans = mid->value;
     merge(l, mid, root);
     merge(root, r, root);
     return ans;
