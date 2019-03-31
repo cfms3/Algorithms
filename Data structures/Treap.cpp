@@ -183,7 +183,7 @@ private:
       upd_sz(r);
       upd_sz(l);
     }
-  }
+  } 
 
   void merge(pnode_t l, pnode_t r, pnode_t &ans) {
     push(l);
