@@ -1,0 +1,36 @@
+# Any line followed by a '#' character is ignored
+# Section headings must be in square brackets
+# Subsections within a section should follow the format:
+#   [filename within code directory][tab character \t][subsection title]
+# tab character:	
+
+[Data Structures]
+DataStructures/ColorUpdate.cpp	Color Update
+DataStructures/persistent_seg_tree.cpp	Persistent seg tree
+DataStructures/SegmentTree.cpp	Seg tree
+DataStructures/SparseTable.cpp	Sparse table
+DataStructures/sqrt.cpp	Sqrt
+DataStructures/Treap.cpp	Treap 
+
+[Graph Algorithms]
+Graph/arborescence.cpp	arborescence
+Graph/CentroidDecomposition.cpp	Centroid Decomposition
+
+[Dynamic Programming]
+DP/CHT.cpp	CHT
+DP/slope_trick.cpp	Slope Trick
+
+[Math]
+Math/DirichletConvolution.cpp	Dirichlet Convolution
+Math/MillerAndRho.cpp	Miller and Rho
+
+[String Algorithms]
+String/hash.cpp	Hash
+String/kmp_automaton.cpp	Kmp Automaton
+
+[Miscellaneous]
+Miscellaneous/oper.cpp	Operations
+Miscellaneous/count_inversions.cpp	Count Inversions
+
+[Teoremas e formulas uteis]
+teoremas.txt	Teoremas

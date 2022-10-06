@@ -1,0 +1,13 @@
+Quadrangular inequality
+- SE cost(l, r) + cost(l + 1, r + 1) <= cost(l, r + 1) + cost(l + 1, r)
+- E f(l, r) = dp[l - 1] + cost(l, r) 
+- Entao f(l, r) tbm obedece a quadrangular inequality
+- Isso implica que se existe um k tal que f(l + 1, k) <= f(l, k), entao f(l + 1, k + 1) <= f(l, k)
+  Ou seja, a partir do momento que o (l + 1) fica melhor do que o l, ele sempre eh melhor. 
+- Com isso da pra otimizar dp[x] para O(n * log), fazendo uma busca binaria pra descobrir quando (l + 1) fica melhor do que l
+
+Se e >= log2(m)
+n^e mod m = n^(phi(m) + e mod phi(m)) mod m
+Se e < log2(m), so fazer o bruto
+
+phi(phi(m)) <= m/2
